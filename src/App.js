@@ -5,12 +5,8 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Shop from './pages/Shop/Shop';
 import Product from './pages/Product/Product';
-import Collections from './pages/Collections/Collections';
-import CollectionDetail from './pages/Collections/CollectionDetail';
 import OurStory from './pages/OurStory/OurStory';
 import Ingredients from './pages/Ingredients/Ingredients';
-import Journal from './pages/Journal/Journal';
-import Contact from './pages/Contact/Contact';
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './context/CartContext';
 import './App.css';
@@ -26,12 +22,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/product/:id" element={<Product />} />
-              <Route path="/collections" element={<Collections />} />
-              <Route path="/collections/:slug" element={<CollectionDetail />} />
               <Route path="/our-story" element={<OurStory />} />
               <Route path="/ingredients" element={<Ingredients />} />
-              <Route path="/journal" element={<Journal />} />
-              <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
           <Footer />

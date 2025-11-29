@@ -54,23 +54,20 @@ const Footer = () => {
             <div className="footer__column">
               <h4 className="footer__column-title">Shop</h4>
               <ul className="footer__links">
-                <li><Link to="/collections">All Collections</Link></li>
+                <li><Link to="/shop">All Products</Link></li>
                 <li><Link to="/shop?filter=bestseller">Best Sellers</Link></li>
                 <li><Link to="/shop?filter=new">New Arrivals</Link></li>
-                <li><Link to="/shop?category=gift">Gift Sets</Link></li>
               </ul>
             </div>
 
             {/* Support Column */}
             <div className="footer__column">
-              <h4 className="footer__column-title">Support</h4>
+              <h4 className="footer__column-title">Company</h4>
               <ul className="footer__links">
-                <li><Link to="/contact">Contact Us</Link></li>
-                <li><Link to="/faq">FAQs</Link></li>
+                <li><Link to="/our-story">Our Story</Link></li>
+                <li><Link to="/ingredients">Ingredients</Link></li>
                 <li><Link to="/shipping">Shipping Info</Link></li>
                 <li><Link to="/returns">Returns & Exchanges</Link></li>
-                <li><Link to="/privacy">Privacy Policy</Link></li>
-                <li><Link to="/terms">Terms & Conditions</Link></li>
               </ul>
             </div>
 

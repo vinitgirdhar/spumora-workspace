@@ -27,15 +27,7 @@ const Header = () => {
   const shopDropdown = [
     { name: 'All Products', path: '/shop' },
     { name: 'Best Sellers', path: '/shop?filter=bestseller' },
-    { name: 'New Arrivals', path: '/shop?filter=new' },
-    { name: 'Gift Sets', path: '/shop?category=gift' }
-  ];
-
-  const collectionsDropdown = [
-    { name: 'All Collections', path: '/collections' },
-    { name: 'Botanical Collection', path: '/collections/botanical' },
-    { name: 'Essential Collection', path: '/collections/essential' },
-    { name: 'Premium Collection', path: '/collections/premium' }
+    { name: 'New Arrivals', path: '/shop?filter=new' }
   ];
 
   return (
@@ -75,31 +67,11 @@ const Header = () => {
                 ))}
               </div>
             </li>
-            <li 
-              className="header__nav-item header__nav-item--dropdown"
-              onMouseEnter={() => setActiveDropdown('collections')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <Link to="/collections" className="header__nav-link">Collections</Link>
-              <div className={`header__dropdown ${activeDropdown === 'collections' ? 'header__dropdown--active' : ''}`}>
-                {collectionsDropdown.map((item, index) => (
-                  <Link key={index} to={item.path} className="header__dropdown-link">
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </li>
             <li className="header__nav-item">
               <Link to="/our-story" className="header__nav-link">Our Story</Link>
             </li>
             <li className="header__nav-item">
               <Link to="/ingredients" className="header__nav-link">Ingredients</Link>
-            </li>
-            <li className="header__nav-item">
-              <Link to="/journal" className="header__nav-link">Journal</Link>
-            </li>
-            <li className="header__nav-item">
-              <Link to="/contact" className="header__nav-link">Contact</Link>
             </li>
           </ul>
         </nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { products, collections, testimonials } from '../../data/products';
+import { products, testimonials } from '../../data/products';
 import heroBg from '../../assets/hero-soap-background.jpg';
 import gmpCertified from '../../assets/gmp-certified.png';
 import fdaApproved from '../../assets/fda-approved.png';
@@ -113,34 +113,6 @@ const Home = () => {
           </div>
           <div className="section-cta">
             <Link to="/shop" className="btn btn-outline">View All Products</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Collections Showcase */}
-      <section className="collections-showcase section bg-cream">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="heading-lg">Our Collections</h2>
-            <p className="section-subtitle">Curated ranges for every need</p>
-          </div>
-          <div className="collections-grid">
-            {collections.map(collection => (
-              <Link 
-                key={collection.id} 
-                to={`/collections/${collection.slug}`}
-                className="collection-card"
-              >
-                <div className="collection-card__image">
-                  <img src={collection.image} alt={collection.name} />
-                </div>
-                <div className="collection-card__overlay">
-                  <h3 className="collection-card__title">{collection.name}</h3>
-                  <p className="collection-card__tagline">{collection.tagline}</p>
-                  <span className="collection-card__cta">Explore Collection</span>
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
