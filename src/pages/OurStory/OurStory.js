@@ -188,6 +188,53 @@ const OurStory = () => {
         </div>
       </section>
 
+      {/* Pro Tips Section */}
+      <section className="tips-section section bg-cream">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="heading-lg">Tips from Team Spumora</h2>
+            <p className="section-subtitle">Get the most out of your handmade cold process soaps</p>
+          </div>
+          <div className="tips-grid">
+            <div className="tip-card">
+              <div className="tip-card__number">01</div>
+              <h3>Let It Absorb</h3>
+              <p>
+                After applying the soap on your body, leave it on for 2–3 minutes before rinsing. 
+                This allows the natural ingredients to absorb into your skin for deeper nourishment.
+              </p>
+            </div>
+            <div className="tip-card">
+              <div className="tip-card__number">02</div>
+              <h3>Use Warm Water</h3>
+              <p>
+                While you can use our soap with any water temperature, we suggest using it with 
+                warm water for better lather and absorption.
+              </p>
+            </div>
+            <div className="tip-card">
+              <div className="tip-card__number">03</div>
+              <h3>Be Consistent</h3>
+              <p>
+                For the best and most visible results, use the soap regularly for 35–40 days. 
+                Natural products work gently and effectively over time.
+              </p>
+            </div>
+            <div className="tip-card">
+              <div className="tip-card__number">04</div>
+              <h3>Store Properly</h3>
+              <p>
+                Keep your soap in a well-drained soap dish between uses. Allowing it to dry 
+                properly extends its life and maintains its quality.
+              </p>
+            </div>
+          </div>
+          <p className="tips-note">
+            With care, <strong>Team Spumora</strong> 💚
+          </p>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="story-cta section">
         <div className="container text-center">

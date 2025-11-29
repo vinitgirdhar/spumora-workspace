@@ -182,6 +182,27 @@
   gap: 4px;
 }
 
+/* Certification Logos */
+.footer__certifications {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.footer__cert-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition: all var(--transition-fast);
+}
+
+.footer__cert-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .footer__grid {
@@ -225,5 +246,13 @@
   .footer__badges {
     flex-wrap: wrap;
     justify-content: center;
+  }
+  
+  .footer__certifications {
+    justify-content: center;
+  }
+  
+  .footer__cert-logo {
+    height: 40px;
   }
 }

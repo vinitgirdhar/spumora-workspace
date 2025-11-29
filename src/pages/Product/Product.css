@@ -231,6 +231,28 @@
   color: var(--dark-green);
 }
 
+/* Certification Logos */
+.product-info__certifications {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--cream-ivory);
+  border-radius: var(--radius-md);
+}
+
+.product-info__cert-logo {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  transition: all var(--transition-fast);
+}
+
+.product-info__cert-logo:hover {
+  transform: scale(1.08);
+}
+
 /* Meta */
 .product-info__meta {
   margin-bottom: var(--spacing-lg);

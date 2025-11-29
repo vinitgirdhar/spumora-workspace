@@ -30,8 +30,8 @@ export const products = [
     slug: 'cafe-scrub',
     shortDescription: 'Energizing coffee exfoliation',
     description: 'Awaken your senses with our invigorating Café Scrub soap. Infused with freshly ground coffee beans and rich cocoa butter, this luxurious bar gently exfoliates while deeply moisturizing your skin. The natural caffeine helps boost circulation, leaving your skin feeling refreshed, smooth, and radiant.',
-    price: 18.99,
-    originalPrice: 24.99,
+    price: 200,
+    originalPrice: null,
     category: 'exfoliating',
     collection: 'botanical',
     scent: 'earthy',
@@ -57,7 +57,7 @@ export const products = [
       'Leaves skin silky smooth',
       'Energizing aromatherapy'
     ],
-    howToUse: 'Wet skin thoroughly. Lather the soap between your hands or with a loofah. Massage gently onto skin in circular motions, focusing on rough areas. Rinse well with warm water. Use 2-3 times per week for best results.',
+    howToUse: 'Wet skin with warm water for better lather. Lather the soap between your hands or with a loofah. Massage gently onto skin in circular motions, focusing on rough areas. Let it sit for 2-3 minutes to allow the coffee and natural ingredients to absorb deeply into your skin. Rinse well with warm water. Use 2-3 times per week for best exfoliation results. For visible transformation, continue regular use for 35-40 days.',
     size: '120g / 4.2oz',
     weight: '120g'
   },
@@ -67,7 +67,7 @@ export const products = [
     slug: 'neem-nourish',
     shortDescription: 'Purifying herbal therapy',
     description: 'Experience the ancient healing power of neem with our Neem Nourish soap. This therapeutic bar combines the purifying properties of neem leaf extract with soothing aloe vera and nourishing oils. Perfect for problem skin, it helps clear blemishes while maintaining your skin\'s natural moisture balance.',
-    price: 16.99,
+    price: 200,
     originalPrice: null,
     category: 'therapeutic',
     collection: 'botanical',
@@ -94,7 +94,7 @@ export const products = [
       'Natural antibacterial protection',
       'Promotes clear, healthy skin'
     ],
-    howToUse: 'Create a rich lather with warm water. Apply to face and body, gently massaging for 30-60 seconds. Allow the neem-infused lather to work for a minute before rinsing. Use daily for best results.',
+    howToUse: 'Create a rich lather with warm water for optimal absorption. Apply to face and body, gently massaging for 30-60 seconds. Allow the neem-infused lather to sit on your skin for 2-3 minutes – this lets the powerful antibacterial and healing properties of neem penetrate deeply. Rinse with warm water and pat dry. Use daily for best results. For clear, healthy skin, maintain consistent use for 35-40 days.',
     size: '110g / 3.9oz',
     weight: '110g'
   },
@@ -104,8 +104,8 @@ export const products = [
     slug: 'saffron-milk',
     shortDescription: 'Luxurious radiance elixir',
     description: 'Indulge in the royal luxury of our Saffron Milk soap. Crafted with precious saffron strands, creamy goat milk, and pure honey, this opulent bar is your secret to glowing, luminous skin. The ancient beauty ritual of saffron meets modern skincare science for truly radiant results.',
-    price: 24.99,
-    originalPrice: 29.99,
+    price: 200,
+    originalPrice: null,
     category: 'luxury',
     collection: 'premium',
     scent: 'floral',
@@ -131,7 +131,7 @@ export const products = [
       'Anti-aging properties',
       'Leaves skin glowing and radiant'
     ],
-    howToUse: 'For best results, use as part of your evening skincare routine. Lather generously and massage onto damp skin for 1-2 minutes to allow the saffron and milk to penetrate. Rinse with lukewarm water and pat dry.',
+    howToUse: 'For best results, use as part of your evening skincare routine. Lather generously with warm water and massage onto damp skin. Leave the saffron and milk-infused lather on your skin for 2-3 minutes to allow deep absorption of the luxurious ingredients. Rinse with lukewarm water and pat dry gently. The precious saffron works gradually – use consistently for 35-40 days to experience the full radiance and glow.',
     size: '115g / 4.0oz',
     weight: '115g'
   },
@@ -141,7 +141,7 @@ export const products = [
     slug: 'sunrise-citrus',
     shortDescription: 'Refreshing morning burst',
     description: 'Start your day with the vibrant energy of our Sunrise Citrus soap. A harmonious blend of orange, lemon, and grapefruit essential oils creates an uplifting shower experience that awakens your senses. Enriched with vitamin C and citrus extracts, this bar leaves your skin bright, fresh, and ready to face the day.',
-    price: 15.99,
+    price: 200,
     originalPrice: null,
     category: 'refreshing',
     collection: 'essential',
@@ -168,7 +168,7 @@ export const products = [
       'Rich in antioxidants',
       'Uplifting aromatherapy'
     ],
-    howToUse: 'Perfect for morning showers. Lather between hands and apply to wet skin. Breathe deeply to enjoy the aromatherapy benefits. Rinse thoroughly. Follow with your favorite moisturizer.',
+    howToUse: 'Perfect for morning showers to start your day refreshed. Use warm water for better lather. Apply to wet skin and massage gently, breathing deeply to enjoy the uplifting citrus aromatherapy. Let the vitamin C-rich lather sit on your skin for 2-3 minutes before rinsing thoroughly with warm water. Follow with your favorite moisturizer. For brighter, more energized skin, use daily and maintain consistency for 35-40 days.',
     size: '125g / 4.4oz',
     weight: '125g'
   }

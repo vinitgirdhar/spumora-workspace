@@ -70,9 +70,9 @@ const ProductCard = ({ product }) => {
           </div>
 
           <div className="product-card__price">
-            <span className="product-card__current-price">${product.price.toFixed(2)}</span>
+            <span className="product-card__current-price">₹{product.price}</span>
             {product.originalPrice && (
-              <span className="product-card__original-price">${product.originalPrice.toFixed(2)}</span>
+              <span className="product-card__original-price">₹{product.originalPrice}</span>
             )}
           </div>
         </div>

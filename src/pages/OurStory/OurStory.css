@@ -231,9 +231,67 @@
   margin: 0 auto var(--spacing-lg);
 }
 
+/* Tips Section */
+.tips-section {
+  background-color: var(--cream-ivory);
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.tip-card {
+  background-color: var(--pure-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tip-card__number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--warm-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tip-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--dark-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tip-card p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(44, 44, 44, 0.75);
+}
+
+.tips-note {
+  text-align: center;
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--dark-green);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .tips-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
@@ -272,6 +330,10 @@
   }
   
   .values-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tips-grid {
     grid-template-columns: 1fr;
   }
   

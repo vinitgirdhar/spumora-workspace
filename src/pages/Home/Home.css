@@ -167,6 +167,41 @@
   line-height: 1.6;
 }
 
+/* Certifications */
+.certifications {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid rgba(74, 93, 69, 0.15);
+  text-align: center;
+}
+
+.certifications__text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark-green);
+  margin-bottom: var(--spacing-md);
+}
+
+.certifications__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+}
+
+.certifications__logo {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+  transition: all var(--transition-fast);
+}
+
+.certifications__logo:hover {
+  transform: scale(1.08);
+}
+
 /* Products Grid */
 .products-grid {
   display: grid;
@@ -405,6 +440,59 @@
   opacity: 1;
 }
 
+/* Usage Tips Section */
+.usage-tips {
+  background: linear-gradient(135deg, #f8f6f3 0%, #fff9f0 100%);
+}
+
+.usage-tips__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.usage-tip {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background-color: var(--pure-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.usage-tip:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.usage-tip__icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.usage-tip__title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: var(--dark-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.usage-tip__description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(44, 44, 44, 0.75);
+}
+
+.usage-tips__note {
+  text-align: center;
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--dark-green);
+  font-weight: 500;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
   .products-grid {
@@ -459,6 +547,14 @@
     padding: var(--spacing-md);
   }
   
+  .certifications__logos {
+    gap: var(--spacing-lg);
+  }
+  
+  .certifications__logo {
+    height: 55px;
+  }
+  
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
@@ -481,6 +577,15 @@
   .ingredients-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
+  }
+  
+  .usage-tips__grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .usage-tip {
+    padding: var(--spacing-lg);
   }
   
   .testimonials-grid {

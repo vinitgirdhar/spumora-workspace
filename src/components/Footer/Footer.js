@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import gmpCertified from '../../assets/gmp-certified.png';
+import fdaApproved from '../../assets/fda-approved.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -115,6 +117,10 @@ const Footer = () => {
               <span className="footer__badge">🌿 100% Natural</span>
               <span className="footer__badge">🐰 Cruelty Free</span>
               <span className="footer__badge">♻️ Eco Friendly</span>
+            </div>
+            <div className="footer__certifications">
+              <img src={gmpCertified} alt="GMP Certified" className="footer__cert-logo" />
+              <img src={fdaApproved} alt="FDA Approved" className="footer__cert-logo" />
             </div>
           </div>
         </div>

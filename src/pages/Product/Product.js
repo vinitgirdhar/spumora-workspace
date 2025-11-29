@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { products } from '../../data/products';
+import gmpCertified from '../../assets/gmp-certified.png';
+import fdaApproved from '../../assets/fda-approved.png';
 import './Product.css';
 
 const Product = () => {
@@ -113,9 +115,9 @@ const Product = () => {
               </div>
 
               <div className="product-info__price">
-                <span className="product-info__current-price">${product.price.toFixed(2)}</span>
+                <span className="product-info__current-price">₹{product.price}</span>
                 {product.originalPrice && (
-                  <span className="product-info__original-price">${product.originalPrice.toFixed(2)}</span>
+                  <span className="product-info__original-price">₹{product.originalPrice}</span>
                 )}
               </div>
 
@@ -134,7 +136,7 @@ const Product = () => {
                   <button onClick={() => setQuantity(quantity + 1)}>+</button>
                 </div>
                 <button className="btn btn-primary btn-lg" onClick={handleAddToCart}>
-                  Add to Cart — ${(product.price * quantity).toFixed(2)}
+                  Add to Cart — ₹{product.price * quantity}
                 </button>
               </div>
 
@@ -150,6 +152,12 @@ const Product = () => {
                 <span className="product-badge">🌿 100% Natural</span>
                 <span className="product-badge">✋ Handcrafted</span>
                 <span className="product-badge">🐰 Cruelty Free</span>
+              </div>
+
+              {/* Certification Logos */}
+              <div className="product-info__certifications">
+                <img src={gmpCertified} alt="GMP Certified" className="product-info__cert-logo" />
+                <img src={fdaApproved} alt="FDA Approved" className="product-info__cert-logo" />
               </div>
 
               {/* Product Meta */}

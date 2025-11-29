@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { products, collections, testimonials } from '../../data/products';
 import heroBg from '../../assets/hero-soap-background.jpg';
+import gmpCertified from '../../assets/gmp-certified.png';
+import fdaApproved from '../../assets/fda-approved.png';
 import './Home.css';
 
 const Home = () => {
@@ -83,6 +85,15 @@ const Home = () => {
               <p className="feature__description">
                 Environmentally conscious packaging and ethically sourced ingredients
               </p>
+            </div>
+          </div>
+          
+          {/* Certification Badges */}
+          <div className="certifications">
+            <p className="certifications__text">Certified Quality You Can Trust</p>
+            <div className="certifications__logos">
+              <img src={gmpCertified} alt="GMP Certified" className="certifications__logo" />
+              <img src={fdaApproved} alt="FDA Approved" className="certifications__logo" />
             </div>
           </div>
         </div>
@@ -196,6 +207,45 @@ const Home = () => {
           <div className="section-cta">
             <Link to="/ingredients" className="btn btn-secondary">Explore All Ingredients</Link>
           </div>
+        </div>
+      </section>
+
+      {/* Usage Tips Section */}
+      <section className="usage-tips section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="heading-lg">Get the Best from Your Spumora Soap</h2>
+            <p className="section-subtitle">Simple tips for maximum benefits</p>
+          </div>
+          <div className="usage-tips__grid">
+            <div className="usage-tip">
+              <div className="usage-tip__icon">⏱️</div>
+              <h3 className="usage-tip__title">Let It Absorb</h3>
+              <p className="usage-tip__description">
+                After applying the soap on your body, leave it on for 2–3 minutes before rinsing. 
+                This allows the natural ingredients to absorb into your skin for deeper nourishment.
+              </p>
+            </div>
+            <div className="usage-tip">
+              <div className="usage-tip__icon">💧</div>
+              <h3 className="usage-tip__title">Use Warm Water</h3>
+              <p className="usage-tip__description">
+                While you can use our soap with any water temperature, we suggest using it with 
+                warm water for better lather and absorption of beneficial ingredients.
+              </p>
+            </div>
+            <div className="usage-tip">
+              <div className="usage-tip__icon">📅</div>
+              <h3 className="usage-tip__title">Be Consistent</h3>
+              <p className="usage-tip__description">
+                For the best and most visible results, use the soap regularly for 35–40 days. 
+                Natural products work gently and effectively over time.
+              </p>
+            </div>
+          </div>
+          <p className="usage-tips__note">
+            Enjoy the soft, smooth, and refreshed feeling that comes with every use! 💚
+          </p>
         </div>
       </section>
 
