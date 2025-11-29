@@ -1,0 +1,225 @@
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+}
+
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background-color: var(--pure-white);
+  z-index: 1101;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.cart__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.cart__title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.cart__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--charcoal);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.cart__close:hover {
+  background-color: var(--cream-ivory);
+}
+
+/* Empty Cart */
+.cart__empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  gap: var(--spacing-md);
+  color: var(--primary-sage);
+}
+
+.cart__empty p {
+  font-size: 1.125rem;
+  color: var(--charcoal);
+}
+
+/* Cart Items */
+.cart__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+.cart__item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--cream-ivory);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+}
+
+.cart__item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cart__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart__item-details {
+  flex: 1;
+}
+
+.cart__item-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.cart__item-price {
+  font-size: 0.9375rem;
+  color: var(--dark-green);
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cart__item-quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.cart__item-quantity button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--pure-white);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--charcoal);
+  transition: all var(--transition-fast);
+}
+
+.cart__item-quantity button:hover:not(:disabled) {
+  border-color: var(--dark-green);
+  color: var(--dark-green);
+}
+
+.cart__item-quantity button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart__item-quantity span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.cart__item-remove {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  color: var(--charcoal);
+  opacity: 0.5;
+  transition: all var(--transition-fast);
+}
+
+.cart__item-remove:hover {
+  opacity: 1;
+  color: #dc3545;
+}
+
+/* Cart Footer */
+.cart__footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--cream-dark);
+  background-color: var(--pure-white);
+}
+
+.cart__subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cart__shipping-note {
+  font-size: 0.875rem;
+  color: rgba(44, 44, 44, 0.6);
+  margin-bottom: var(--spacing-md);
+}
+
+.cart__checkout-btn {
+  width: 100%;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cart__continue {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--dark-green);
+  text-decoration: underline;
+}
+
+.cart__continue:hover {
+  color: var(--charcoal);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cart {
+    max-width: 100%;
+  }
+}
