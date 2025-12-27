@@ -6,12 +6,15 @@ from flask_cors import CORS
 from datetime import datetime
 import json
 import os
+import hmac
+import hashlib
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Crucial: Allows your React frontend to hit this API
 
 # Configuration
 app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
+app.config['SHOPIFY_WEBHOOK_SECRET'] = os.environ.get('SHOPIFY_WEBHOOK_SECRET', '')
 
 # In-memory storage (replace with database in production)
 orders = []
@@ -122,13 +125,98 @@ products = [
 # API Routes
 # ============================================
 
+@app.route('/api/webhooks/order-paid', methods=['POST'])
+def handle_order_paid():
+    """
+    Shopify Webhook Handler for Order Payment
+    Configure this URL in your Shopify Admin > Settings > Notifications > Webhooks
+    """
+    data = request.get_json()
+    
+    # Shopify sends the whole order object here
+    order_number = data.get('name', 'N/A')
+    email = data.get('email', 'N/A')
+    total = data.get('total_price', '0')
+    line_items = data.get('line_items', [])
+    
+    # Log the order
+    print(f"✅ Success! Order {order_number} paid by {email} for ₹{total}")
+    print(f"Items: {len(line_items)}")
+    
+    # Store order in memory (replace with database in production)
+    order_record = {
+        'order_number': order_number,
+        'email': email,
+        'total': total,
+        'items': line_items,
+        'timestamp': datetime.now().isoformat(),
+        'status': 'paid'
+    }
+    orders.append(order_record)
+    
+    # TODO: Add your custom logic here:
+    # - Send confirmation email
+    # - Update inventory
+    # - Trigger fulfillment process
+    # - Save to database
+    
+    return jsonify({\"status\": \"received\", \"order\": order_number}), 200
+
+@app.route('/api/check-stock', methods=['POST'])
+def check_stock():
+    \"\"\"Check product stock from Shopify ID\"\"\"
+    data = request.get_json()
+    shopify_id = data.get('shopifyId')
+    
+    # TODO: Implement actual stock check logic
+    # For now, return mock data
+    return jsonify({
+        'inStock': True,
+        'quantity': 10,
+        'shopifyId': shopify_id
+    }), 200
+
+@app.route('/api/submit-order', methods=['POST'])
+def submit_order():
+    \"\"\"Submit order to backend for processing\"\"\"
+    data = request.get_json()
+    
+    # Store order
+    order_record = {
+        'items': data.get('items', []),
+        'customer': data.get('customer', {}),
+        'timestamp': datetime.now().isoformat(),
+        'status': 'pending'
+    }
+    orders.append(order_record)
+    
+    return jsonify({
+        'status': 'success',
+        'orderId': len(orders)
+    }), 200
+
+@app.route('/api/sync-products', methods=['POST'])
+def sync_products():
+    \"\"\"Sync Shopify products with backend\"\"\"
+    data = request.get_json()
+    products_data = data.get('products', [])
+    
+    print(f\"📦 Syncing {len(products_data)} products from Shopify\")
+    
+    # TODO: Store products in database
+    
+    return jsonify({
+        'status': 'success',
+        'synced': len(products_data)
+    }), 200
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    """Health check endpoint"""
+    \"\"\"Health check endpoint\"\"\"
     return jsonify({
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat(),
-        "service": "Spumora API"
+        \"status\": \"healthy\",
+        \"timestamp\": datetime.now().isoformat(),
+        \"service\": \"Spumora API\"
     })
 
 # ============================================

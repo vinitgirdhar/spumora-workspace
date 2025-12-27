@@ -127,6 +127,62 @@ export function CartProvider({ children }) {
     dispatch({ type: 'CLEAR_CART' });
   };
 
+  const createCheckout = async (items = state.items) => {
+    try {
+      // Build line items array from cart items
+      const lineItems = items.map(item => ({
+        // Prefer variantId; fall back to product-level IDs only if needed
+        variantId: item.variantId || item.shopifyId || item.id,
+        quantity: item.quantity || 1
+      }));
+
+      // Create checkout mutation
+      const response = await fetch(
+        `https://${process.env.REACT_APP_SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+          },
+          body: JSON.stringify({
+            query: `mutation checkoutCreate($input: CheckoutCreateInput!) {
+              checkoutCreate(input: $input) {
+                checkout {
+                  id
+                  webUrl
+                }
+                checkoutUserErrors {
+                  message
+                  field
+                }
+              }
+            }`,
+            variables: {
+              input: {
+                lineItems: lineItems
+              }
+            }
+          }),
+        }
+      );
+
+      const { data } = await response.json();
+
+      // Check for errors
+      if (data.checkoutCreate.checkoutUserErrors.length > 0) {
+        console.error('Checkout errors:', data.checkoutCreate.checkoutUserErrors);
+        throw new Error(data.checkoutCreate.checkoutUserErrors[0].message);
+      }
+
+      // Redirect to Shopify secure checkout
+      window.location.href = data.checkoutCreate.checkout.webUrl;
+    } catch (error) {
+      console.error('Failed to create checkout:', error);
+      alert('Failed to proceed to checkout. Please try again.');
+    }
+  };
+
   return (
     <CartContext.Provider value={{
       ...state,
@@ -135,7 +191,8 @@ export function CartProvider({ children }) {
       updateQuantity,
       toggleCart,
       closeCart,
-      clearCart
+      clearCart,
+      createCheckout
     }}>
       {children}
     </CartContext.Provider>

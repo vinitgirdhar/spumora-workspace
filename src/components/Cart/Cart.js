@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
-  const { items, isOpen, closeCart, removeItem, updateQuantity, totalPrice } = useCart();
+  const { items, isOpen, closeCart, removeItem, updateQuantity, totalPrice, createCheckout } = useCart();
+
+  const handleCheckout = () => {
+    createCheckout(items);
+  };
 
   if (!isOpen) return null;
 
@@ -75,14 +79,17 @@ const Cart = () => {
             <div className="cart__footer">
               <div className="cart__subtotal">
                 <span>Subtotal</span>
-                <span>₹{totalPrice}</span>
+                <span>₹{totalPrice.toFixed(2)}</span>
               </div>
               <p className="cart__shipping-note">
                 Shipping & taxes calculated at checkout
               </p>
-              <Link to="/checkout" className="btn btn-primary cart__checkout-btn" onClick={closeCart}>
-                Proceed to Checkout
-              </Link>
+              <button 
+                className="btn btn-primary cart__checkout-btn" 
+                onClick={handleCheckout}
+              >
+                Proceed to Shopify Checkout
+              </button>
               <button className="cart__continue" onClick={closeCart}>
                 Continue Shopping
               </button>

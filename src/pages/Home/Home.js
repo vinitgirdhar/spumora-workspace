@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { products, testimonials } from '../../data/products';
+import { products as localProducts, testimonials } from '../../data/products';
 import heroBg from '../../assets/hero-soap-background.jpg';
 import gmpCertified from '../../assets/gmp-certified.png';
 import fdaApproved from '../../assets/fda-approved.png';
 import './Home.css';
 
-const Home = () => {
-  const featuredProducts = products.slice(0, 8);
+const Home = ({ shopifyProducts = [] }) => {
+  // Use Shopify products if available, otherwise fall back to local data
+  const productsToDisplay = shopifyProducts.length > 0 ? shopifyProducts : localProducts;
+  const featuredProducts = productsToDisplay.slice(0, 8);
   
   return (
     <div className="home">
@@ -122,7 +124,7 @@ const Home = () => {
         <div className="container">
           <div className="story-teaser__grid">
             <div className="story-teaser__image">
-              <img src={products[0].images[0]} alt="Soap making process" />
+              <img src={productsToDisplay[0]?.images?.[0] || localProducts[0]?.images?.[0]} alt="Soap making process" />
             </div>
             <div className="story-teaser__content">
               <h2 className="heading-lg">The Art of Soap Making</h2>
@@ -257,7 +259,7 @@ const Home = () => {
             <p className="section-subtitle">@spumora</p>
           </div>
           <div className="instagram-grid">
-            {products.slice(0, 6).map((product, index) => (
+            {productsToDisplay.slice(0, 6).map((product, index) => (
               <a 
                 key={index} 
                 href="https://instagram.com/spumora" 

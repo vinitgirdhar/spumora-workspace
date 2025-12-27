@@ -1,13 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../../data/products';
+import heroName from '../../assets/wiall.png';
 import './OurStory.css';
 
 const OurStory = () => {
+  // Toggle visibility for the team section; set to true when ready to show again
+  const showTeam = false;
+
+  const heroBackground = heroName || products[2].images[0];
+
   return (
     <div className="our-story">
       {/* Hero */}
-      <section className="story-hero" style={{ backgroundImage: `url(${products[2].images[0]})` }}>
+      <section
+        className="story-hero"
+        style={{
+          backgroundImage: `url(${heroBackground})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundColor: '#f4f0ea'
+        }}
+      >
         <div className="story-hero__overlay"></div>
         <div className="story-hero__content">
           <nav className="breadcrumb breadcrumb--light">
@@ -44,9 +59,6 @@ const OurStory = () => {
                 craftsmanship, and natural ingredients remains unchanged. We're proud to 
                 share our passion with you.
               </p>
-            </div>
-            <div className="story-image">
-              <img src={products[0].images[2]} alt="Soap making workshop" />
             </div>
           </div>
         </div>
@@ -143,50 +155,51 @@ const OurStory = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="team-section section bg-sage">
-        <div className="container">
-          <div className="section-header section-header--light">
-            <h2 className="heading-lg">Meet the Team</h2>
-            <p className="section-subtitle">The people behind every bar</p>
+      {showTeam && (
+        <section className="team-section section bg-sage">
+          <div className="container">
+            <div className="section-header section-header--light">
+              <h2 className="heading-lg">Meet the Team</h2>
+              <p className="section-subtitle">The people behind every bar</p>
+            </div>
+            <div className="team-grid">
+              <div className="team-card">
+                <div className="team-card__image">
+                  <img src={products[3].images[0]} alt="Team member" />
+                </div>
+                <h3>Emma Spumora</h3>
+                <p className="team-card__role">Founder & Master Soap Maker</p>
+                <p className="team-card__bio">
+                  Third-generation soap maker with a passion for blending traditional 
+                  techniques with modern skincare science.
+                </p>
+              </div>
+              <div className="team-card">
+                <div className="team-card__image">
+                  <img src={products[1].images[0]} alt="Team member" />
+                </div>
+                <h3>David Chen</h3>
+                <p className="team-card__role">Head of Product Development</p>
+                <p className="team-card__bio">
+                  Cosmetic chemist dedicated to creating innovative, effective 
+                  formulations using only natural ingredients.
+                </p>
+              </div>
+              <div className="team-card">
+                <div className="team-card__image">
+                  <img src={products[0].images[0]} alt="Team member" />
+                </div>
+                <h3>Sarah Williams</h3>
+                <p className="team-card__role">Sustainability Director</p>
+                <p className="team-card__bio">
+                  Environmental advocate ensuring our practices remain kind to the 
+                  planet while delivering exceptional products.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="team-grid">
-            <div className="team-card">
-              <div className="team-card__image">
-                <img src={products[3].images[0]} alt="Team member" />
-              </div>
-              <h3>Emma Spumora</h3>
-              <p className="team-card__role">Founder & Master Soap Maker</p>
-              <p className="team-card__bio">
-                Third-generation soap maker with a passion for blending traditional 
-                techniques with modern skincare science.
-              </p>
-            </div>
-            <div className="team-card">
-              <div className="team-card__image">
-                <img src={products[1].images[0]} alt="Team member" />
-              </div>
-              <h3>David Chen</h3>
-              <p className="team-card__role">Head of Product Development</p>
-              <p className="team-card__bio">
-                Cosmetic chemist dedicated to creating innovative, effective 
-                formulations using only natural ingredients.
-              </p>
-            </div>
-            <div className="team-card">
-              <div className="team-card__image">
-                <img src={products[0].images[0]} alt="Team member" />
-              </div>
-              <h3>Sarah Williams</h3>
-              <p className="team-card__role">Sustainability Director</p>
-              <p className="team-card__bio">
-                Environmental advocate ensuring our practices remain kind to the 
-                planet while delivering exceptional products.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Pro Tips Section */}
       <section className="tips-section section bg-cream">
