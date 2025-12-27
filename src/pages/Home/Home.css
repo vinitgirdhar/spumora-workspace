@@ -90,7 +90,14 @@
   align-items: center;
   gap: var(--spacing-sm);
   color: var(--pure-white);
-  opacity: 0.7;
+  opacity: 0.8;
+  z-index: 2;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.hero__scroll:hover {
+  opacity: 1;
 }
 
 .hero__scroll span {
@@ -100,7 +107,19 @@
 }
 
 .hero__scroll-icon {
-  animation: float 2s ease-in-out infinite;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Section Headers */
