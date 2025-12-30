@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import ProductCard from '../../components/ProductCard/ProductCard';
-import { products } from '../../data/products';
 import gmpCertified from '../../assets/gmp-certified.png';
 import fdaApproved from '../../assets/fda-approved.png';
 import './Product.css';
 
-const Product = () => {
+const Product = ({ shopifyProducts = [] }) => {
   const { id } = useParams();
   const { addItem } = useCart();
   const [product, setProduct] = useState(null);
@@ -16,14 +14,14 @@ const Product = () => {
   const [activeTab, setActiveTab] = useState('ingredients');
 
   useEffect(() => {
-    const foundProduct = products.find(p => p.slug === id);
+    const foundProduct = shopifyProducts.find(p => p.handle === id);
     if (foundProduct) {
       setProduct(foundProduct);
       setSelectedImage(0);
       setQuantity(1);
     }
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [id, shopifyProducts]);
 
   if (!product) {
     return (
@@ -37,10 +35,14 @@ const Product = () => {
   }
 
   const handleAddToCart = () => {
+    if (!product.variantId) {
+      alert('This item is not connected to Shopify yet. Please refresh or try a different product.');
+      return;
+    }
     addItem({ ...product, quantity });
   };
 
-  const relatedProducts = products
+  const relatedProducts = shopifyProducts
     .filter(p => p.collection === product.collection && p.id !== product.id)
     .slice(0, 4);
 
@@ -273,21 +275,7 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Related Products */}
-      {relatedProducts.length > 0 && (
-        <section className="related-products section">
-          <div className="container">
-            <div className="section-header">
-              <h2 className="heading-lg">You May Also Like</h2>
-            </div>
-            <div className="related-products__grid">
-              {relatedProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Related products removed for now; reintroduce once Shopify product data is finalized. */}
     </div>
   );
 };

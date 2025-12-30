@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { products as localProducts, testimonials } from '../../data/products';
+import { testimonials } from '../../data/products';
 import heroBg from '../../assets/hero-soap-background.jpg';
 import gmpCertified from '../../assets/gmp-certified.png';
 import fdaApproved from '../../assets/fda-approved.png';
 import './Home.css';
 
 const Home = ({ shopifyProducts = [] }) => {
-  // Use Shopify products if available, otherwise fall back to local data
-  const productsToDisplay = shopifyProducts.length > 0 ? shopifyProducts : localProducts;
+  const productsToDisplay = shopifyProducts;
   const featuredProducts = productsToDisplay.slice(0, 8);
   
   return (
@@ -124,7 +123,7 @@ const Home = ({ shopifyProducts = [] }) => {
         <div className="container">
           <div className="story-teaser__grid">
             <div className="story-teaser__image">
-              <img src={productsToDisplay[0]?.images?.[0] || localProducts[0]?.images?.[0]} alt="Soap making process" />
+              <img src={productsToDisplay[0]?.images?.[0] || heroBg} alt="Soap making process" />
             </div>
             <div className="story-teaser__content">
               <h2 className="heading-lg">The Art of Soap Making</h2>

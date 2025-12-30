@@ -4,59 +4,29 @@ import { useCart } from '../../context/CartContext';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const { addItem } = useCart();
+  const { addItem, createCheckout } = useCart();
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    if (!product.variantId) {
+      alert('This item is not connected to Shopify yet. Please refresh or try a different product.');
+      return;
+    }
     addItem(product);
   };
 
   const handleBuyNow = async (e) => {
     e.preventDefault();
-    
-    // Use variantId if available; otherwise fall back to product IDs
-    const variantId = product.variantId || product.shopifyId || product.id;
-    
-    const query = `
-      mutation checkoutCreate($input: CheckoutCreateInput!) {
-        checkoutCreate(input: $input) {
-          checkout { webUrl }
-          checkoutUserErrors { message }
-        }
-      }
-    `;
-
-    const variables = {
-      input: { lineItems: [{ variantId, quantity: 1 }] }
-    };
-
     try {
-      const response = await fetch(
-        `https://${process.env.REACT_APP_SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Storefront-Access-Token': process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-          },
-          body: JSON.stringify({ query, variables }),
-        }
-      );
-
-      const { data } = await response.json();
-      
-      if (data.checkoutCreate.checkoutUserErrors?.length > 0) {
-        console.error('Checkout errors:', data.checkoutCreate.checkoutUserErrors);
-        alert('Failed to create checkout. Please try adding to cart instead.');
+      if (!product.variantId) {
+        alert('This item is not connected to Shopify yet. Please add another product.');
         return;
       }
-      
-      if (data.checkoutCreate.checkout?.webUrl) {
-        window.location.href = data.checkoutCreate.checkout.webUrl;
-      }
+      const checkoutUrl = await createCheckout([{ ...product, quantity: 1 }]);
+      window.location.href = checkoutUrl;
     } catch (error) {
       console.error('Checkout failed:', error);
-      alert('Failed to proceed to checkout. Please try again.');
+      alert('Failed to proceed to checkout. Please try adding to cart instead.');
     }
   };
 

@@ -8,7 +8,7 @@ import Product from './pages/Product/Product';
 import OurStory from './pages/OurStory/OurStory';
 import Ingredients from './pages/Ingredients/Ingredients';
 import Cart from './components/Cart/Cart';
-import Login from './components/Login/Login';
+import Profile from './pages/Profile/Profile';
 import ProductGrid from './components/ProductGrid';
 import { CartProvider } from './context/CartContext';
 import './App.css';
@@ -20,13 +20,21 @@ function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const domain = process.env.REACT_APP_SHOPIFY_STORE_DOMAIN;
+        const token = process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+
+        if (!domain || !token) {
+          console.error('Missing Shopify env vars. Check REACT_APP_SHOPIFY_STORE_DOMAIN and REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN.');
+          return;
+        }
+
         const response = await fetch(
-          `https://${process.env.REACT_APP_SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
+          `https://${domain}/api/2025-01/graphql.json`,
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'X-Shopify-Storefront-Access-Token': process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+              'X-Shopify-Storefront-Access-Token': token,
             },
             body: JSON.stringify({
               query: `{
@@ -112,15 +120,16 @@ function App() {
     <CartProvider>
       <Router>
         <div className="app">
-          <Header />
+          <Header shopifyProducts={shopifyProducts} />
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home shopifyProducts={shopifyProducts} />} />
               <Route path="/shop" element={<Shop shopifyProducts={shopifyProducts} />} />
-              <Route path="/product/:id" element={<Product />} />
+              <Route path="/product/:id" element={<Product shopifyProducts={shopifyProducts} />} />
               <Route path="/our-story" element={<OurStory />} />
               <Route path="/ingredients" element={<Ingredients />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Profile />} />
             </Routes>
           </main>
           <Footer />

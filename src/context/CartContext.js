@@ -128,59 +128,58 @@ export function CartProvider({ children }) {
   };
 
   const createCheckout = async (items = state.items) => {
-    try {
-      // Build line items array from cart items
-      const lineItems = items.map(item => ({
-        // Prefer variantId; fall back to product-level IDs only if needed
-        variantId: item.variantId || item.shopifyId || item.id,
-        quantity: item.quantity || 1
-      }));
-
-      // Create checkout mutation
-      const response = await fetch(
-        `https://${process.env.REACT_APP_SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Storefront-Access-Token': process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-          },
-          body: JSON.stringify({
-            query: `mutation checkoutCreate($input: CheckoutCreateInput!) {
-              checkoutCreate(input: $input) {
-                checkout {
-                  id
-                  webUrl
-                }
-                checkoutUserErrors {
-                  message
-                  field
-                }
-              }
-            }`,
-            variables: {
-              input: {
-                lineItems: lineItems
-              }
-            }
-          }),
-        }
-      );
-
-      const { data } = await response.json();
-
-      // Check for errors
-      if (data.checkoutCreate.checkoutUserErrors.length > 0) {
-        console.error('Checkout errors:', data.checkoutCreate.checkoutUserErrors);
-        throw new Error(data.checkoutCreate.checkoutUserErrors[0].message);
+    // Cart API requires a ProductVariant GID (merchandiseId). Do not accept numeric IDs.
+    const lines = items.map(item => {
+      const merchandiseId = item.variantId;
+      if (!merchandiseId || !String(merchandiseId).startsWith('gid://')) {
+        const name = item.name || 'one of the items';
+        throw new Error(`Missing Shopify variant for ${name}. Please refresh and add the item again.`);
       }
+      return {
+        merchandiseId,
+        quantity: item.quantity || 1,
+      };
+    });
 
-      // Redirect to Shopify secure checkout
-      window.location.href = data.checkoutCreate.checkout.webUrl;
-    } catch (error) {
-      console.error('Failed to create checkout:', error);
-      alert('Failed to proceed to checkout. Please try again.');
+    const response = await fetch(
+      `https://${process.env.REACT_APP_SHOPIFY_STORE_DOMAIN}/api/2025-01/graphql.json`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({
+          query: `mutation cartCreate($input: CartInput!) {
+            cartCreate(input: $input) {
+              cart { id checkoutUrl }
+              userErrors { field message }
+            }
+          }`,
+          variables: { input: { lines } }
+        }),
+      }
+    );
+
+    const { data, errors } = await response.json();
+
+    if (errors?.length) {
+      console.error('Cart creation failed:', errors);
+      throw new Error(errors[0].message || 'Cart creation failed');
     }
+
+    const userErrors = data?.cartCreate?.userErrors || [];
+    if (userErrors.length) {
+      console.error('Cart user errors:', userErrors);
+      throw new Error(userErrors[0].message || 'Unable to create cart');
+    }
+
+    const checkoutUrl = data?.cartCreate?.cart?.checkoutUrl;
+    if (!checkoutUrl) {
+      throw new Error('Checkout URL not returned');
+    }
+
+    return checkoutUrl;
   };
 
   return (

@@ -1,13 +1,18 @@
 import React from 'react';
 import { useCart } from '../../context/CartContext';
-import { Link } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
   const { items, isOpen, closeCart, removeItem, updateQuantity, totalPrice, createCheckout } = useCart();
 
-  const handleCheckout = () => {
-    createCheckout(items);
+  const handleCheckout = async () => {
+    try {
+      const checkoutUrl = await createCheckout(items);
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      console.error('Checkout failed:', error);
+      alert('Failed to proceed to checkout. Please try again.');
+    }
   };
 
   if (!isOpen) return null;

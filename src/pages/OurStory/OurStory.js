@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../../data/products';
 import heroName from '../../assets/wiall.png';
 import './OurStory.css';
 
@@ -8,7 +7,7 @@ const OurStory = () => {
   // Toggle visibility for the team section; set to true when ready to show again
   const showTeam = false;
 
-  const heroBackground = heroName || products[2].images[0];
+  const heroBackground = heroName;
 
   return (
     <div className="our-story">
@@ -155,51 +154,7 @@ const OurStory = () => {
         </div>
       </section>
 
-      {showTeam && (
-        <section className="team-section section bg-sage">
-          <div className="container">
-            <div className="section-header section-header--light">
-              <h2 className="heading-lg">Meet the Team</h2>
-              <p className="section-subtitle">The people behind every bar</p>
-            </div>
-            <div className="team-grid">
-              <div className="team-card">
-                <div className="team-card__image">
-                  <img src={products[3].images[0]} alt="Team member" />
-                </div>
-                <h3>Emma Spumora</h3>
-                <p className="team-card__role">Founder & Master Soap Maker</p>
-                <p className="team-card__bio">
-                  Third-generation soap maker with a passion for blending traditional 
-                  techniques with modern skincare science.
-                </p>
-              </div>
-              <div className="team-card">
-                <div className="team-card__image">
-                  <img src={products[1].images[0]} alt="Team member" />
-                </div>
-                <h3>David Chen</h3>
-                <p className="team-card__role">Head of Product Development</p>
-                <p className="team-card__bio">
-                  Cosmetic chemist dedicated to creating innovative, effective 
-                  formulations using only natural ingredients.
-                </p>
-              </div>
-              <div className="team-card">
-                <div className="team-card__image">
-                  <img src={products[0].images[0]} alt="Team member" />
-                </div>
-                <h3>Sarah Williams</h3>
-                <p className="team-card__role">Sustainability Director</p>
-                <p className="team-card__bio">
-                  Environmental advocate ensuring our practices remain kind to the 
-                  planet while delivering exceptional products.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Team section intentionally hidden for now; re-enable with real assets/content later. */}
 
       {/* Pro Tips Section */}
       <section className="tips-section section bg-cream">

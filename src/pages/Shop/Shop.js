@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { products as localProducts } from '../../data/products';
 import './Shop.css';
 
 const Shop = ({ shopifyProducts = [] }) => {
-  // Use Shopify products if available, otherwise fall back to local data
-  const productsToDisplay = shopifyProducts.length > 0 ? shopifyProducts : localProducts;
+  const productsToDisplay = shopifyProducts;
   
   const [activeFilter, setActiveFilter] = useState('all');
 
   // Get unique categories from products
-  const categories = ['all', ...new Set(productsToDisplay.map(p => p.category))];
+  const uniqueCategories = Array.from(new Set(productsToDisplay.map(p => p.category))).filter(c => c !== 'all');
+  const categories = ['all', ...uniqueCategories];
 
   // Filter products based on active filter
   const filteredProducts = productsToDisplay.filter(product => {
