@@ -65,7 +65,6 @@ const Footer = () => {
               <h4 className="footer__column-title">Company</h4>
               <ul className="footer__links">
                 <li><Link to="/our-story">Our Story</Link></li>
-                <li><Link to="/ingredients">Ingredients</Link></li>
                 <li><Link to="/track-order">Track Order</Link></li>
                 <li><Link to="/shipping">Shipping Info</Link></li>
                 <li><Link to="/returns">Returns & Exchanges</Link></li>
