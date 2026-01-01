@@ -61,12 +61,17 @@ const Shop = ({ shopifyProducts = [] }) => {
             Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
           </p>
 
-          {/* Products Grid */}
-          <div className="shop__products-grid">
-            {filteredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {productsToDisplay.length === 0 ? (
+            <p style={{ textAlign: 'center', padding: '20px', color: '#555' }}>
+              No products available yet. Confirm your Shopify env vars and reload.
+            </p>
+          ) : (
+            <div className="shop__products-grid">
+              {filteredProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

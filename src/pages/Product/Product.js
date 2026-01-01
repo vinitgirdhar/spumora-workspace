@@ -24,6 +24,10 @@ const Product = ({ shopifyProducts = [] }) => {
   }, [id, shopifyProducts]);
 
   if (!product) {
+    // Show loading while Shopify data is fetching; fallback to not-found once data is present
+    if (shopifyProducts.length === 0) {
+      return <div className="product-not-found"><div className="container"><h1>Loading...</h1></div></div>;
+    }
     return (
       <div className="product-not-found">
         <div className="container">
@@ -33,6 +37,9 @@ const Product = ({ shopifyProducts = [] }) => {
       </div>
     );
   }
+
+  const priceAmount = Number(product?.price?.amount ?? product?.price ?? 0);
+  const originalPriceAmount = product?.originalPrice?.amount ?? product?.originalPrice ?? null;
 
   const handleAddToCart = () => {
     if (!product.variantId) {
@@ -117,9 +124,9 @@ const Product = ({ shopifyProducts = [] }) => {
               </div>
 
               <div className="product-info__price">
-                <span className="product-info__current-price">₹{product.price}</span>
-                {product.originalPrice && (
-                  <span className="product-info__original-price">₹{product.originalPrice}</span>
+                <span className="product-info__current-price">₹{priceAmount.toFixed(2)}</span>
+                {originalPriceAmount && (
+                  <span className="product-info__original-price">₹{Number(originalPriceAmount).toFixed(2)}</span>
                 )}
               </div>
 
@@ -138,7 +145,7 @@ const Product = ({ shopifyProducts = [] }) => {
                   <button onClick={() => setQuantity(quantity + 1)}>+</button>
                 </div>
                 <button className="btn btn-primary btn-lg" onClick={handleAddToCart}>
-                  Add to Cart — ₹{product.price * quantity}
+                  Add to Cart — ₹{(priceAmount * quantity).toFixed(2)}
                 </button>
               </div>
 
@@ -170,14 +177,18 @@ const Product = ({ shopifyProducts = [] }) => {
                 </div>
                 <div className="product-meta-item">
                   <span className="product-meta-item__label">Collection:</span>
-                  <Link to={`/collections/${product.collection}`} className="product-meta-item__value product-meta-item__link">
-                    {product.collection.charAt(0).toUpperCase() + product.collection.slice(1)}
+                  <Link to={`/collections/${product.collection || ''}`} className="product-meta-item__value product-meta-item__link">
+                    {(product.collection && product.collection.length > 0)
+                      ? product.collection[0].toUpperCase() + product.collection.slice(1)
+                      : 'Collection'}
                   </Link>
                 </div>
                 <div className="product-meta-item">
                   <span className="product-meta-item__label">Scent:</span>
                   <span className="product-meta-item__value">
-                    {product.scent.charAt(0).toUpperCase() + product.scent.slice(1)}
+                    {(product.scent && product.scent.length > 0)
+                      ? product.scent[0].toUpperCase() + product.scent.slice(1)
+                      : 'Scent'}
                   </span>
                 </div>
               </div>
@@ -238,12 +249,16 @@ const Product = ({ shopifyProducts = [] }) => {
                 <div className="product-tab-panel">
                   <h3>Key Ingredients</h3>
                   <div className="ingredients-list">
-                    {product.ingredients.map((ing, index) => (
-                      <div key={index} className="ingredient-card">
-                        <h4>{ing.name}</h4>
-                        <p>{ing.benefit}</p>
-                      </div>
-                    ))}
+                    {(product.ingredients || []).length > 0 ? (
+                      product.ingredients.map((ing, index) => (
+                        <div key={index} className="ingredient-card">
+                          <h4>{ing.name}</h4>
+                          <p>{ing.benefit}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Ingredients information coming soon.</p>
+                    )}
                   </div>
                 </div>
               )}
@@ -252,14 +267,18 @@ const Product = ({ shopifyProducts = [] }) => {
                 <div className="product-tab-panel">
                   <h3>Benefits</h3>
                   <ul className="benefits-list">
-                    {product.benefits.map((benefit, index) => (
-                      <li key={index}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        {benefit}
-                      </li>
-                    ))}
+                    {(product.benefits || []).length > 0 ? (
+                      product.benefits.map((benefit, index) => (
+                        <li key={index}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                          </svg>
+                          {benefit}
+                        </li>
+                      ))
+                    ) : (
+                      <li>Benefits information coming soon.</li>
+                    )}
                   </ul>
                 </div>
               )}

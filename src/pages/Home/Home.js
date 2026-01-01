@@ -107,14 +107,22 @@ const Home = ({ shopifyProducts = [] }) => {
             <h2 className="heading-lg">Featured Products</h2>
             <p className="section-subtitle">Discover our most beloved creations</p>
           </div>
-          <div className="products-grid">
-            {featuredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="section-cta">
-            <Link to="/shop" className="btn btn-outline">View All Products</Link>
-          </div>
+          {featuredProducts.length > 0 ? (
+            <>
+              <div className="products-grid">
+                {featuredProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+              <div className="section-cta">
+                <Link to="/shop" className="btn btn-outline">View All Products</Link>
+              </div>
+            </>
+          ) : (
+            <p style={{ textAlign: 'center', padding: '20px', color: '#555' }}>
+              Products will appear here once Shopify data loads.
+            </p>
+          )}
         </div>
       </section>
 

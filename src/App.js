@@ -9,6 +9,8 @@ import OurStory from './pages/OurStory/OurStory';
 import Ingredients from './pages/Ingredients/Ingredients';
 import Cart from './components/Cart/Cart';
 import Profile from './pages/Profile/Profile';
+import Returns from './pages/Returns/Returns';
+import TrackOrder from './pages/TrackOrder/TrackOrder';
 import ProductGrid from './components/ProductGrid';
 import { CartProvider } from './context/CartContext';
 import './App.css';
@@ -102,7 +104,14 @@ function App() {
             isNew: false,
             isBestSeller: false,
             currencyCode: variant?.price.currencyCode || 'INR',
-            shopifyId: node.id // Keep original Shopify ID for backend sync
+            shopifyId: node.id, // Keep original Shopify ID for backend sync
+            // Default values for product detail page
+            ingredients: [],
+            benefits: [],
+            howToUse: 'Wet skin, lather soap in hands or with a washcloth, apply to body, and rinse thoroughly.',
+            size: '100g',
+            scent: node.productType || 'Natural',
+            collection: node.productType?.toLowerCase() || 'all'
           };
         });
         
@@ -128,6 +137,8 @@ function App() {
               <Route path="/product/:id" element={<Product shopifyProducts={shopifyProducts} />} />
               <Route path="/our-story" element={<OurStory />} />
               <Route path="/ingredients" element={<Ingredients />} />
+              <Route path="/returns" element={<Returns />} />
+              <Route path="/track-order" element={<TrackOrder />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Profile />} />
             </Routes>
