@@ -38,6 +38,11 @@ const Product = ({ shopifyProducts = [] }) => {
     );
   }
 
+  // Safety guard for images
+  if (!product.images || product.images.length === 0) {
+    return <div className="product-not-found"><div className="container"><h1>Loading product images...</h1></div></div>;
+  }
+
   const priceAmount = Number(product?.price?.amount ?? product?.price ?? 0);
   const originalPriceAmount = product?.originalPrice?.amount ?? product?.originalPrice ?? null;
 

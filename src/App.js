@@ -49,7 +49,7 @@ function App() {
                       handle
                       description
                       productType
-                      images(first: 2) {
+                      images(first: 20) {
                         edges {
                           node {
                             url
